@@ -1,0 +1,15 @@
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\bin\Debug\net5.0\ProEventos.Domain.deps.json
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\bin\Debug\net5.0\ProEventos.Domain.dll
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\bin\Debug\net5.0\ref\ProEventos.Domain.dll
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\bin\Debug\net5.0\ProEventos.Domain.pdb
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ProEventos.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ProEventos.Domain.AssemblyInfoInputs.cache
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ProEventos.Domain.AssemblyInfo.cs
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ProEventos.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ProEventos.Domain.dll
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ref\ProEventos.Domain.dll
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ProEventos.Domain.pdb
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\bin\Debug\net5.0\ProEventos.Domain.runtimeconfig.json
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\bin\Debug\net5.0\ProEventos.Domain.runtimeconfig.dev.json
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ProEventos.Domain.genruntimeconfig.cache
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ProEventos.Domain.csproj.AssemblyReference.cache
