@@ -3,11 +3,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProEventos.Domain;
 using ProEventos.Domain.Identity;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProEventos.Persistence.Contexto
 {
@@ -27,18 +22,34 @@ namespace ProEventos.Persistence.Contexto
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<UserRole>(userRole => { userRole.HasKey(ur => new { ur.UserId, ur.RoleId }); userRole.HasOne(ur => ur.Role).WithMany(r => r.UserRoles).HasForeignKey(ur => ur.RoleId).IsRequired();
-            userRole.HasOne(ur => ur.User).WithMany(r => r.UserRoles).HasForeignKey(ur => ur.UserId).IsRequired();
+            modelBuilder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+
+                userRole.HasOne(ur => ur.User)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
             }
             );
 
-            modelBuilder.Entity<PalestranteEvento>().HasKey (PE => new { PE.EventoID, PE.ID });
+            modelBuilder.Entity<PalestranteEvento>()
+                .HasKey(PE => new { PE.EventoID, PE.ID });
 
-            modelBuilder.Entity<Evento>().HasMany(e => e.RedesSociais).WithOne(re => re.Evento).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Evento>()
+                .HasMany(e => e.RedesSociais)
+                .WithOne(rs => rs.Evento)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Palestrante>().HasMany(e => e.RedesSociais).WithOne(re => re.Palestrante).OnDelete(DeleteBehavior.Restrict);
-
-
+            modelBuilder.Entity<Palestrante>()
+                .HasMany(e => e.RedesSociais)
+                .WithOne(rs => rs.Palestrante)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

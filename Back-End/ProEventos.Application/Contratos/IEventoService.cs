@@ -1,4 +1,5 @@
 ﻿using ProEventos.Domain;
+using ProEventos.Persistence.Models;
 using ProEventosAPI.Application.Dtos;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,7 @@ namespace ProEventos.Application.Contratos
         Task<bool> DeleteEvento(int userId, int eventoID);
 
 
-        Task<EventoDto[]> GetAllEventosAsync(int userId, bool includePalestrantes = false);
-        Task<EventoDto[]> GetAllEventosByTemaAsync(int userId, string tema, bool includePalestrantes = false);
+        Task<PageList<EventoDto>> GetAllEventosAsync(int userId, PageParams pageParams, bool includePalestrantes = false);
         Task<EventoDto> GetAllEventoByIdAsync(int userId, int eventoID, bool includePalestrantes = false);
 }
 }

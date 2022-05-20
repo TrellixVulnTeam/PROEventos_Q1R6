@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +35,11 @@ import { LoginComponent } from './componentes/user/login/login.component';
 import { RegistrationComponent } from './componentes/user/registration/registration.component';
 import { LoteService } from './services/lote.service';
 import { EventoService } from './services/evento.service';
+import { AccountService } from './services/account.service';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { HomeComponent } from './componentes/home/home.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 
 
 @NgModule({
@@ -53,6 +58,8 @@ import { EventoService } from './services/evento.service';
       UserComponent,
       LoginComponent,
       RegistrationComponent,
+      HomeComponent,
+
 
 
    ],
@@ -75,15 +82,17 @@ import { EventoService } from './services/evento.service';
     }),
     NgxSpinnerModule,
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   exports: [
     NgxCurrencyModule
   ],
   providers: [
     EventoService,
-    LoteService
+    LoteService,
+    AccountService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

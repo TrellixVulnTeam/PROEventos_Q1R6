@@ -32,17 +32,18 @@ namespace ProEventos.Application
         {
             try
             {
-                var user = await _userManager.Users.SingleOrDefaultAsync(user => user.UserName == userUpdateDto.UserName.ToLower());
+                var user = await _userManager.Users
+                                             .SingleOrDefaultAsync(user => user.UserName == userUpdateDto.UserName.ToLower());
+
                 return await _signInManager.CheckPasswordSignInAsync(user, password, false);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-
                 throw new Exception($"Erro ao tentar verificar password. Erro: {ex.Message}");
             }
         }
 
-        public async Task<UserDto> CreateAccountAsync(UserDto userDto)
+        public async Task<UserUpdateDto> CreateAccountAsync(UserDto userDto)
         {
             try
             {
@@ -51,15 +52,15 @@ namespace ProEventos.Application
 
                 if (result.Succeeded)
                 {
-                    var userToReturn = _mapper.Map<UserDto>(user);
+                    var userToReturn = _mapper.Map<UserUpdateDto>(user);
                     return userToReturn;
                 }
+
                 return null;
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-
-                throw new Exception($"Erro ao tentar criar Usuario. Erro: {ex.Message}");
+                throw new Exception($"Erro ao tentar Criar Usuário. Erro: {ex.Message}");
             }
         }
 
@@ -73,10 +74,9 @@ namespace ProEventos.Application
                 var userUpdateDto = _mapper.Map<UserUpdateDto>(user);
                 return userUpdateDto;
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-
-                throw new Exception($"Erro ao tentar buscar usuario. Erro: {ex.Message}");
+                throw new Exception($"Erro ao tentar pegar Usuário por Username. Erro: {ex.Message}");
             }
         }
 
@@ -87,24 +87,30 @@ namespace ProEventos.Application
                 var user = await _userPersistence.GetUserByUserNameAsync(userUpdateDto.UserName);
                 if (user == null) return null;
 
+                userUpdateDto.ID = user.Id;
+
                 _mapper.Map(userUpdateDto, user);
 
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var reset = await _userManager.ResetPasswordAsync(user, token, userUpdateDto.Password);
+                if (userUpdateDto.Password != null)
+                {
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    await _userManager.ResetPasswordAsync(user, token, userUpdateDto.Password);
+                }
 
                 _userPersistence.Update<User>(user);
 
                 if (await _userPersistence.SaveChangesAsync())
                 {
                     var userRetorno = await _userPersistence.GetUserByUserNameAsync(user.UserName);
+
                     return _mapper.Map<UserUpdateDto>(userRetorno);
                 }
+
                 return null;
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-
-                throw new Exception($"Erro ao tentar atualizar usuario. Erro: {ex.Message}");
+                throw new Exception($"Erro ao tentar atualizar usuário. Erro: {ex.Message}");
             }
         }
 
@@ -112,12 +118,12 @@ namespace ProEventos.Application
         {
             try
             {
-                return await _userManager.Users.AnyAsync(user => user.UserName == userName.ToLower());
+                return await _userManager.Users
+                                         .AnyAsync(user => user.UserName == userName.ToLower());
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-
-                throw new Exception($"Erro ao verificar se o usuario existe. Erro: {ex.Message}");
+                throw new Exception($"Erro ao verificar se usuário existe. Erro: {ex.Message}");
             }
         }
     }

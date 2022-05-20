@@ -9,7 +9,7 @@
 
 	<div class="col-md-6">
 
-    <form [formGroup]="form" class="p-1">
+    <form [formGroup]="form" class="p-1" (ngSubmit)="register()">
       <div class="pb-2 d-block d-md-none">
         <h3 class="border-bottom">Cadastro de Usuário</h3>
       </div>
@@ -46,14 +46,14 @@
       <div class="row">
         <div class="mb-3 col-sm-6">
           <label for="">Senha:</label>
-          <input class="form-control" type="password" formControlName="senha" [ngClass]="{'is-invalid': f.senha.errors && f.senha.touched}" placeholder="Digite uma Senha" />
+          <input class="form-control" type="password" formControlName="password" [ngClass]="{'is-invalid': f.password.errors && f.password.touched}" placeholder="Digite uma Senha" />
           <div class="invalid-feedback">
             Senha é Obrigatório.
           </div>
         </div>
         <div class="mb-3 col-sm-6">
           <label for="">Confirmar Senha:</label>
-          <input class="form-control" type="password" formControlName="confirmeSenha" [ngClass]="{'is-invalid': f.confirmeSenha.errors && f.confirmeSenha.touched}" placeholder="Confirme a Senha" />
+          <input class="form-control" type="password" formControlName="confirmePassword" [ngClass]="{'is-invalid': f.confirmePassword.errors && f.confirmePassword.touched}" placeholder="Confirme a Senha" />
           <div class="invalid-feedback">
             Confirmar Senha é Obrigatório.
           </div>
@@ -67,7 +67,7 @@
       </div>
       <div class="row">
         <div class="mb-3 d-grid">
-          <button class="btn btn-lg btn-success btn-block px-5">
+          <button [disabled]="!form.valid" class="btn btn-lg btn-success btn-block px-5" type="submit">
             Registar
           </button>
         </div>

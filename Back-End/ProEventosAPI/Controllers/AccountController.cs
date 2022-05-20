@@ -36,10 +36,11 @@ namespace ProEventosAPI.Controllers
             }
             catch (Exception ex)
             {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar Usuario. Erro:{ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Usuário. Erro: {ex.Message}");
             }
         }
+
 
         [HttpPost("Register")]
         [AllowAnonymous]
@@ -51,7 +52,12 @@ namespace ProEventosAPI.Controllers
                     return BadRequest("Usuario ja Existe");
                 var user = await _accountService.CreateAccountAsync(userDto);
                     if(user != null)
-                    return Ok(user);
+                    return Ok( new
+                    {
+                        userName = user.UserName,
+                        PrimeroNome = user.PrimeiroNome,
+                        token = _tokenService.CreateToken(user).Result
+                    });
 
                 return BadRequest("Usuario não criado, tente novamente mais tarde!");
             }
@@ -69,21 +75,20 @@ namespace ProEventosAPI.Controllers
             try
             {
                 var user = await _accountService.GetUserByUserNameAsync(userLogin.Username);
-                if (user == null) return Unauthorized("Usuario ou Senha esta invalido");
+                if (user == null) return Unauthorized("Usuário ou Senha está errado");
 
                 var result = await _accountService.CheckUserPasswordAsync(user, userLogin.Password);
                 if (!result.Succeeded) return Unauthorized();
 
-                return Ok(new 
-                { 
+                return Ok(new
+                {
                     userName = user.UserName,
-                    PrimeiroNome = user.PrimeiroNome,
+                    PrimeroNome = user.PrimeiroNome,
                     token = _tokenService.CreateToken(user).Result
                 });
             }
             catch (Exception ex)
             {
-
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao tentar realizar Login. Erro: {ex.Message}");
             }
@@ -94,19 +99,26 @@ namespace ProEventosAPI.Controllers
         {
             try
             {
-                var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
-                if (user == null) return Unauthorized("Usuario invalido");
+                if (userUpdateDto.UserName != User.GetUserName())
+                    return Unauthorized("Usuário Inválido");
 
+                var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
+                if (user == null) return Unauthorized("Usuário Inválido");
 
                 var userReturn = await _accountService.UpdateAccount(userUpdateDto);
                 if (userReturn == null) return NoContent();
 
-                return Ok(userReturn);
+                return Ok(new
+                {
+                    userName = userReturn.UserName,
+                    PrimeroNome = userReturn.PrimeiroNome,
+                    token = _tokenService.CreateToken(userReturn).Result
+                });
             }
             catch (Exception ex)
             {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar a tualizar Usuario. Erro:{ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar Atualizar Usuário. Erro: {ex.Message}");
             }
         }
     }
