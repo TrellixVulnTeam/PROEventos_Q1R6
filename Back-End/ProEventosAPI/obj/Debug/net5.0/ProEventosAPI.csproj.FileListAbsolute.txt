@@ -79,3 +79,4 @@ C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEvento
 C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventosAPI\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventosAPI\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventosAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventosAPI\obj\Debug\net5.0\staticwebassets\ProEventosAPI.StaticWebAssets.xml

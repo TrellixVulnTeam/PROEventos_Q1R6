@@ -1,4 +1,5 @@
-﻿using ProEventos.Domain;
+﻿using ProEventos.Application.Dtos;
+using ProEventos.Domain;
 using ProEventos.Persistence.Models;
 using ProEventosAPI.Application.Dtos;
 using System;
@@ -12,11 +13,10 @@ namespace ProEventos.Application.Contratos
     public interface IEventoService
     {
         Task<EventoDto> AddEventos(int userId, EventoDto model);
-        Task<EventoDto> UpdateEvento(int userId, int eventoID, EventoDto model);
-        Task<bool> DeleteEvento(int userId, int eventoID);
-
+        Task<EventoDto> UpdateEvento(int userId, int eventoId, EventoDto model);
+        Task<bool> DeleteEvento(int userId, int eventoId);
 
         Task<PageList<EventoDto>> GetAllEventosAsync(int userId, PageParams pageParams, bool includePalestrantes = false);
-        Task<EventoDto> GetAllEventoByIdAsync(int userId, int eventoID, bool includePalestrantes = false);
-}
+        Task<EventoDto> GetAllEventoByIdAsync(int userId, int eventoId, bool includePalestrantes = false);
+    }
 }
