@@ -24,7 +24,7 @@ namespace ProEventos.Application
             _lotePersistence = lotePersistence;
             _mapper = mapper;
         }
-        public async Task AddLotes(int eventoId, LoteDto model)
+        public async Task AddLote(int eventoId, LoteDto model)
         {
             try
             {
@@ -32,6 +32,7 @@ namespace ProEventos.Application
                 lote.EventoID = eventoId;
 
                 _geralPersistence.Add<Lote>(lote);
+
                 await _geralPersistence.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -39,6 +40,7 @@ namespace ProEventos.Application
                 throw new Exception(ex.Message);
             }
         }
+
         public async Task<LoteDto[]> SaveLotes(int eventoId, LoteDto[] models)
         {
             try
@@ -50,13 +52,13 @@ namespace ProEventos.Application
                 {
                     if (model.ID == 0)
                     {
-                        await AddLotes(eventoId, model);
+                        await AddLote(eventoId, model);
                     }
                     else
                     {
                         var lote = lotes.FirstOrDefault(lote => lote.ID == model.ID);
+                        model.EventoID = eventoId;
 
-                        model.ID = eventoId;
                         _mapper.Map(model, lote);
 
                         _geralPersistence.Update<Lote>(lote);
@@ -64,30 +66,33 @@ namespace ProEventos.Application
                         await _geralPersistence.SaveChangesAsync();
                     }
                 }
-                    var lotesRetorno = await _lotePersistence.GetLotesByEventoIdAsync(eventoId);
 
-                    return _mapper.Map<LoteDto[]>(lotesRetorno);
+                var loteRetorno = await _lotePersistence.GetLotesByEventoIdAsync(eventoId);
+
+                return _mapper.Map<LoteDto[]>(loteRetorno);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
         public async Task<bool> DeleteLote(int eventoId, int loteId)
         {
             try
             {
                 var lote = await _lotePersistence.GetLoteByIdsAsync(eventoId, loteId);
-                if (lote == null) throw new Exception("Lote para Delete não foi encontrado.");
+                if (lote == null) throw new Exception("Lote para delete não encontrado.");
 
                 _geralPersistence.Delete<Lote>(lote);
-                return (await _geralPersistence.SaveChangesAsync());
+                return await _geralPersistence.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
         public async Task<LoteDto[]> GetLotesByEventoIdAsync(int eventoId)
         {
             try
@@ -101,24 +106,23 @@ namespace ProEventos.Application
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
         }
+
         public async Task<LoteDto> GetLoteByIdsAsync(int eventoId, int loteId)
         {
             try
             {
-                var lotes = await _lotePersistence.GetLoteByIdsAsync(eventoId, loteId);
-                if (lotes == null) return null;
+                var lote = await _lotePersistence.GetLoteByIdsAsync(eventoId, loteId);
+                if (lote == null) return null;
 
-                var resultado = _mapper.Map<LoteDto>(lotes);
+                var resultado = _mapper.Map<LoteDto>(lote);
 
                 return resultado;
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
         }

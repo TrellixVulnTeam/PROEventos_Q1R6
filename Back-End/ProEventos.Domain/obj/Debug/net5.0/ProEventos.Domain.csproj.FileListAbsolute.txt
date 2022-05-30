@@ -12,3 +12,4 @@ C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEvento
 C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\bin\Debug\net5.0\ProEventos.Domain.runtimeconfig.json
 C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\bin\Debug\net5.0\ProEventos.Domain.runtimeconfig.dev.json
 C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ProEventos.Domain.genruntimeconfig.cache
+C:\Users\Willian Ramos\Documents\Projetos Back-End\PROEventos\Back-End\ProEventos.Domain\obj\Debug\net5.0\ProEventos.Domain.csproj.AssemblyReference.cache

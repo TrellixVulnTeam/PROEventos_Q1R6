@@ -10,13 +10,13 @@ export class LoteService {
 
   constructor(private http: HttpClient) { }
 
-  public getLotesByEventoId(eventoId: number): Observable<Lote[]>{
-    return this.http.get<Lote[]>(`${this.baseURL}/${eventoId}`).pipe(take(1));
+  public getLotesByEventoId(eventoID: number): Observable<Lote[]>{
+    return this.http.get<Lote[]>(`${this.baseURL}/${eventoID}`).pipe(take(1));
   }
-  public saveLote(eventoId: number, lotes: Lote[]): Observable<Lote>{
-    return this.http.put<Lote>(`${this.baseURL}/${eventoId}`, lotes);
+  public saveLote(eventoID: number, lotes: Lote[]): Observable<Lote>{
+    return this.http.put<Lote>(`${this.baseURL}/${eventoID}`, lotes);
   }
-  public deleteLote(loteId: number, eventoId: number): Observable<any>{
-    return this.http.delete(`${this.baseURL}/${eventoId}/${loteId}`).pipe(take(1));
+  public deleteLote(loteId: number, eventoID: number): Observable<any>{
+    return this.http.delete(`${this.baseURL}/${eventoID}/${loteId}`).pipe(take(1));
   }
 }

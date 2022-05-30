@@ -82,7 +82,7 @@ namespace ProEventosAPI.Controllers
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar Eventos. Erro: {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar adicionar Palestrante. Erro: {ex.Message}");
             }
         }
         [HttpPut()]
@@ -96,7 +96,7 @@ namespace ProEventosAPI.Controllers
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar atualizar Eventos. Erro: {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar atualizar Palestrante. Erro: {ex.Message}");
             }
         }
     }

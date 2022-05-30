@@ -39,6 +39,12 @@ import { AccountService } from './services/account.service';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HomeComponent } from './componentes/home/home.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { PerfilDetalheComponent } from './componentes/user/perfil/perfil-detalhe/perfil-detalhe.component';
+import { PalestranteListaComponent } from './componentes/palestrantes/palestrante-lista/palestrante-lista.component';
+import { PalestranteDetalheComponent } from './componentes/palestrantes/palestrante-detalhe/palestrante-detalhe.component';
+import { RedesSociaisComponent } from './componentes/redesSociais/redesSociais.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -59,7 +65,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
       LoginComponent,
       RegistrationComponent,
       HomeComponent,
-
+      PerfilDetalheComponent,
+      PalestranteListaComponent,
+      PalestranteDetalheComponent,
+      RedesSociaisComponent
 
 
    ],
@@ -82,7 +91,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     }),
     NgxSpinnerModule,
     BsDatepickerModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    TabsModule.forRoot()
   ],
   exports: [
     NgxCurrencyModule
@@ -91,6 +101,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     EventoService,
     LoteService,
     AccountService,
+    DatePipe,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],

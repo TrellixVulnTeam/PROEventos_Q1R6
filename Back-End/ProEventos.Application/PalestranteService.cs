@@ -28,10 +28,10 @@ namespace ProEventos.Application
         {
             try
             {
-                var Palestrante = _mapper.Map<Palestrante>(model);
-                Palestrante.UserID = userId;
+                var palestrante = _mapper.Map<Palestrante>(model);
+                palestrante.UserID = userId;
 
-                _palestrantePersistence.Add<Palestrante>(Palestrante);
+                _palestrantePersistence.Add(palestrante);
 
                 if (await _palestrantePersistence.SaveChangesAsync())
                 {
@@ -51,21 +51,21 @@ namespace ProEventos.Application
         {
             try
             {
-                var Palestrante = await _palestrantePersistence.GetPalestranteByUserIdAsync(userId, false);
-                if (Palestrante == null) return null;
+                var palestrante = await _palestrantePersistence.GetPalestranteByUserIdAsync(userId, false);
+                if (palestrante == null) return null;
 
-                model.ID = Palestrante.ID;
+                model.ID = palestrante.ID;
                 model.UserID = userId;
 
-                _mapper.Map(model, Palestrante);
+                _mapper.Map(model, palestrante);
 
-                _palestrantePersistence.Update<Palestrante>(Palestrante);
+                _palestrantePersistence.Update<Palestrante>(palestrante);
 
                 if (await _palestrantePersistence.SaveChangesAsync())
                 {
-                    var PalestranteRetorno = await _palestrantePersistence.GetPalestranteByUserIdAsync(userId, false);
+                    var palestranteRetorno = await _palestrantePersistence.GetPalestranteByUserIdAsync(userId, false);
 
-                    return _mapper.Map<PalestranteDto>(PalestranteRetorno);
+                    return _mapper.Map<PalestranteDto>(palestranteRetorno);
                 }
                 return null;
             }
@@ -79,15 +79,15 @@ namespace ProEventos.Application
         {
             try
             {
-                var Palestrantes = await _palestrantePersistence.GetAllPalestrantesAsync(pageParams, includeEventos);
-                if (Palestrantes == null) return null;
+                var palestrantes = await _palestrantePersistence.GetAllPalestrantesAsync(pageParams, includeEventos);
+                if (palestrantes == null) return null;
 
-                var resultado = _mapper.Map<PageList<PalestranteDto>>(Palestrantes);
+                var resultado = _mapper.Map<PageList<PalestranteDto>>(palestrantes);
 
-                resultado.CurrentPage = Palestrantes.CurrentPage;
-                resultado.TotalPages = Palestrantes.TotalPages;
-                resultado.PageSize = Palestrantes.PageSize;
-                resultado.TotalCount = Palestrantes.TotalCount;
+                resultado.CurrentPage = palestrantes.CurrentPage;
+                resultado.TotalPages = palestrantes.TotalPages;
+                resultado.PageSize = palestrantes.PageSize;
+                resultado.TotalCount = palestrantes.TotalCount;
 
                 return resultado;
             }
@@ -101,10 +101,10 @@ namespace ProEventos.Application
         {
             try
             {
-                var Palestrante = await _palestrantePersistence.GetPalestranteByUserIdAsync(userId, includeEventos);
-                if (Palestrante == null) return null;
+                var palestrante = await _palestrantePersistence.GetPalestranteByUserIdAsync(userId, includeEventos);
+                if (palestrante == null) return null;
 
-                var resultado = _mapper.Map<PalestranteDto>(Palestrante);
+                var resultado = _mapper.Map<PalestranteDto>(palestrante);
 
                 return resultado;
             }

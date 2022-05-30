@@ -4,6 +4,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from '@environments/environment';
 import { AccountService } from '@app/services/account.service';
 import { UserUpdate } from '@app/Models/identity/UserUpdate';
+import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-perfil',

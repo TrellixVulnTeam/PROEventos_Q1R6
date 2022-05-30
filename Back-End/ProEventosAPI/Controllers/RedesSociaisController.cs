@@ -74,6 +74,7 @@ namespace ProEventosAPI.Controllers
             }
         }
 
+
         [HttpPut("evento/{eventoId}")]
         public async Task<IActionResult> SaveByEvento(int eventoId, RedeSocialDto[] models)
         {

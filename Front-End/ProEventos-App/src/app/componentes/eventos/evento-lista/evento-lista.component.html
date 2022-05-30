@@ -1,77 +1,106 @@
 <div class="card rounded shadow-sm p-3">
-<div action="" class="d-flex">
-  <div class="flex-fill pr-3">
-    <div class="input-group">
-      <div class="input-group-prepend">
-      <div class="input-group-text">Filtro: </div>
-    </div>
-      <input type="text" class="form-control" placeholder="Filtrar por Tema e Local"
-      (input)="filtrarEventos($event.target)">
-    </div>
-  </div>
-  <div>
-    <a class="d-flex btn btn-outline-primary" routerLink="/eventos/detalhe"><i class="fa fa-plus-circle my-1"></i><b class="ms-1 d-none d-sm-block">Novo</b></a>
-  </div>
-</div>
-<hr>
 
-<table class="table table-striped table-hover">
-  <thead class="table-dark">
-    <tr>
-      <th class="text-center d-none d-md-table-cell"><button type="button" class="btn btn-outline-light btn-sm" (click)="alterarImg()"><i class="{{mostrarImg ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>{{mostrarImg ? 'Exibir' : 'Ocultar'}}</button></th>
-      <th class="text-center" scope="col">#</th>
-      <th class="text-center" scope="col">Tema</th>
-      <th class="text-center d-none d-md-table-cell" scope="col">Local</th>
-      <th class="text-center" scope="col">Data</th>
-      <th class="text-center d-none d-md-table-cell" scope="col">Quantidade de Pessoas</th>
-      <th class="text-center d-none d-md-table-cell" scope="col">Lote</th>
-      <th class="text-center" scope="col">Opções</th>
+  <div class="d-flex">
+    <div class="flex-fill pr-3">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Filtro: </div>
+        </div>
+        <input
+        type="text"
+        class="form-control"
+        placeholder="Filtrar por Tema e Local"
+        (input)="filtrarEventos($event.target)"
+        >
+      </div>
+    </div>
+    <div>
+      <a class="d-flex btn btn-outline-primary" routerLink="/eventos/detalhe">
+        <i class="fa fa-plus-circle my-1"></i>
+        <b class="ml-1 d-none d-sm-block">Novo</b>
+      </a>
+    </div>
+    </div>
+  <!-- <h3>Filtro: {{filtroLista}}</h3> -->
+  <table class="table table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th class="d-none d-md-table-cell">
+          <button type="button" class="btn btn-outline-light btn-sm"
+          (click)="alterarImagem()">
+          <i class="{{!exibirImagem ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
+          {{!exibirImagem ? 'exibir' : 'ocultar'}}
+        </button>
+      </th>
+      <th>Código</th>
+      <th>Tema</th>
+      <th class="d-none d-md-table-cell">Local</th>
+      <th>Data</th>
+      <th class="d-none d-md-table-cell">Qtd Pessoas</th>
+      <th class="d-none d-md-table-cell">Lote</th>
+      <th>Opções</th>
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length">
     <tr *ngFor="let evento of eventos" (click)="detalheEvento(evento.id)" style="cursor: pointer;">
-      <td class="d-none d-md-table-cell"><img [collapse]="!mostrarImg" class="mx-auto" [isAnimated]="true" [src]="mostraImage(evento.imagemURL)" [style.width.px]="widthImg" [style.margin.px]="marginImg" alt="" ></td>
-      <td class="text-center">{{evento.id}}</td>
-      <td class="text-center">{{evento.tema}}</td>
-      <td class="text-center d-none d-md-table-cell">{{evento.local}}</td>
-      <td class="text-center">{{evento.dataEvento | DateFormatPipe}}</td>
-      <td class="text-center d-none d-md-table-cell">{{evento.quantidadePessoas}}</td>
-      <td class="text-center d-none d-md-table-cell">{{evento.lotes}}</td>
-      <td class="text-center">
-        <button type="button" class="btn btn-danger btn-lg" tooltip="Excluir" (click)="openModal($event, template, evento.id)"><i class="fa fa-trash"></i>Excluir</button>
+      <td class="d-none d-md-table-cell">
+        <img [collapse]="!exibirImagem"
+        [isAnimated]="true"
+        [src]="mostraImagem(evento.imagemURL)"
+        [style.width.px]="larguraImagem"
+        [style.margin.px]="margemImagem"
+        >
+      </td>
+      <td>{{evento.id}}</td>
+      <td>{{evento.tema}}</td>
+      <td class="d-none d-md-table-cell">{{evento.local}}</td>
+      <td>{{evento.dataEvento}}</td>
+      <td class="d-none d-md-table-cell">{{evento.quantidadePessoas}}</td>
+      <td class="d-none d-md-table-cell">{{evento.lotes[0]?.nome | uppercase}}</td>
+      <td>
+        <button type="button" class="btn btn-danger btn-lg" tooltip="Excluir" (click)="openModal($event, template, evento.id)">
+          <i class="fa fa-trash"></i>
+        </button>
       </td>
     </tr>
   </tbody>
-  <tfoot *ngIf="!eventos && eventos.length">
+  <tfoot *ngIf="!eventos.length">
     <tr>
       <td colspan="8" class="text-center">
-          <h4>Nenhum evento Encontrado!</h4>
+        <h4>Nenhum evento encontrado!</h4>
       </td>
     </tr>
   </tfoot>
 </table>
 
-
 <div class="d-flex justify-content-center">
-  <pagination [boundaryLinks]="true"
-      [totalItems]="pagination.totalItems"
-      [(ngModel)]="pagination.currentPage"
-      (pageChanged)="pageChanged($event)"
-      pageBtnClass="btn"
-      [itemsPerPage]="pagination.itemsPerPage"
 
+  <pagination
+    [boundaryLinks]="true"
 
-  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-</pagination>
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+
+    pageBtnClass="btn"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;">
+
+  </pagination>
+
 </div>
 
 </div>
 
+<!-- {{eventos | json}} -->
 
 <ng-template #template>
   <div class="modal-body text-center">
-    <p>Ter certeza que deseja deletar o Evento de Código {{this.eventoId}} ?</p>
-    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
-    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+    <p>Tem certeza que quer deletar o Evento de Código {{this.eventoId}}?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">Não</button>
   </div>
 </ng-template>

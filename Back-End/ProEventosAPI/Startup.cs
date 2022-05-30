@@ -92,7 +92,7 @@ namespace ProEventosAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProEventosAPI", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme {
                     Description = @"JTW Authorization header usando Bearer.
-                                    Entre com 'Brearer' [Espaço] entao coloque seu Token.
+                                    Entre com 'Bearer' [Espaço] entao coloque seu Token.
                                     Exemplo: 'Bearer 123456abcdefg'",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
